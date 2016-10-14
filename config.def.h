@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static int borderpx = 2;
+static char font[] = "Liberation Mono:pixelsize=13:lcdfilter=lcddefault:hintstyle=hintnone:rgba=rgb:antialias=true:autohint=false";
+static int borderpx = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -16,7 +16,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char shell[] = "/bin/sh";
+static char shell[] = "/run/current-system/sw/bin/zsh";
 static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -84,31 +84,23 @@ static unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
-
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
-
-	[255] = 0,
-
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+	/* solarized dark */
+	"#282828",  /*  0: black    */
+	"#cc241d",  /*  1: red      */
+	"#98971a",  /*  2: green    */
+	"#d79921",  /*  3: yellow   */
+	"#458588",  /*  4: blue     */
+	"#b16286",  /*  5: magenta  */
+	"#689d6a",  /*  6: cyan     */
+	"#a89984",  /*  7: white    */
+	"#928374",  /*  8: brblack  */
+	"#fb4934",  /*  9: brred    */
+	"#b8bb26",  /* 10: brgreen  */
+	"#fabd2f",  /* 11: bryellow */
+	"#83a598",  /* 12: brblue   */
+	"#d3869b",  /* 13: brmagenta*/
+	"#8ec07c",  /* 14: brcyan   */
+	"#ebdbb2",  /* 15: brwhite  */
 };
 
 
@@ -116,10 +108,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-static unsigned int defaultfg = 7;
+static unsigned int defaultfg = 15;
 static unsigned int defaultbg = 0;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+static unsigned int defaultcs = 15;
+static unsigned int defaultrcs = 0;
 
 /*
  * Default shape of cursor
@@ -128,7 +120,7 @@ static unsigned int defaultrcs = 257;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 4;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -172,6 +164,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
+	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
 };
 
 /*
